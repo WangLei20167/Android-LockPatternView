@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="LockPatternView">
+    <attr format="color" name="colorInner"/>
+    <attr format="color" name="colorOutter"/>
+    <attr format="color" name="colorNodeOn"/>
+    <attr format="dimension" name="lineWidth"/>
+    <attr format="color" name="lineColor"/>
+    <attr format="integer" name="sideNodeCount"/>
+    <attr format="dimension" name="nodeSize"/>
+    <attr format="dimension" name="nodeAreaExpand"/>
+    <attr format="boolean" name="autoClear"/>
+  </declare-styleable>
+
+</resources>
