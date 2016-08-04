@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.AnimRes;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -13,79 +14,84 @@ import android.view.animation.AnimationUtils;
  * @author Vincent Cheung (coolingfall@gmail.com)
  */
 @SuppressLint("ViewConstructor") final class NodeView extends View {
-  private int centerX;
-  private int centerY;
-  private int radius;
-  private float innerRadiusRate = 0.4f;
-  private int colorInner;
-  private int colorOutter;
-  private int colorNodeOn;
-  private Paint paint;
-  private boolean isHighlight;
-  private int nodeNumber;
+	private int centerX;
+	private int centerY;
+	private int radius;
+	private float innerRadiusRate = 0.4f;
+	private int colorInner;
+	private int colorOutter;
+	private int colorNodeOn;
+	private Paint paint;
+	private int nodeOnAnim;
+	private boolean isHighlight;
+	private int nodeNumber;
 
-  NodeView(Context context, int colorInner, int colorOutter, int colorNodeOn) {
-    super(context);
-    this.colorInner = colorInner;
-    this.colorOutter = colorOutter;
-    this.colorNodeOn = colorNodeOn;
-    paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-  }
+	NodeView(Context context, int colorInner, int colorOutter, int colorNodeOn) {
+		super(context);
+		this.colorInner = colorInner;
+		this.colorOutter = colorOutter;
+		this.colorNodeOn = colorNodeOn;
+		paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
+	}
 
-  @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    int width = MeasureSpec.getSize(widthMeasureSpec);
-    int height = MeasureSpec.getSize(heightMeasureSpec);
+	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		int width = MeasureSpec.getSize(widthMeasureSpec);
+		int height = MeasureSpec.getSize(heightMeasureSpec);
 
-    width = Math.min(width, height);
-    radius = centerX = centerY = width / 2;
-  }
+		width = Math.min(width, height);
+		radius = centerX = centerY = width / 2;
+	}
 
-  @Override protected void onDraw(Canvas canvas) {
-    if (isHighlight) {
-      /* inner circle */
-      paint.setStyle(Paint.Style.FILL);
-      paint.setColor(colorNodeOn);
-      canvas.drawCircle(centerX, centerY, radius * innerRadiusRate, paint);
-    } else {
-      /* outter circle */
-      paint.setStyle(Paint.Style.FILL);
-      paint.setColor(colorOutter);
-      canvas.drawCircle(centerX, centerY, radius, paint);
-      /* inner circle */
-      paint.setColor(colorInner);
-      canvas.drawCircle(centerX, centerY, radius * innerRadiusRate, paint);
-    }
-  }
+	@Override protected void onDraw(Canvas canvas) {
+		if (isHighlight) {
+	  /* inner circle */
+			paint.setStyle(Paint.Style.FILL);
+			paint.setColor(colorNodeOn);
+			canvas.drawCircle(centerX, centerY, radius * innerRadiusRate, paint);
+		} else {
+	  /* outter circle */
+			paint.setStyle(Paint.Style.FILL);
+			paint.setColor(colorOutter);
+			canvas.drawCircle(centerX, centerY, radius, paint);
+	  /* inner circle */
+			paint.setColor(colorInner);
+			canvas.drawCircle(centerX, centerY, radius * innerRadiusRate, paint);
+		}
+	}
 
-  void setNodeNumber(int number) {
-    this.nodeNumber = number;
-  }
+	void setNodeNumber(int number) {
+		this.nodeNumber = number;
+	}
 
-  int getNodeNumber() {
-    return nodeNumber;
-  }
+	int getNodeNumber() {
+		return nodeNumber;
+	}
 
-  void setHighlight(boolean isHighlight) {
-    this.isHighlight = isHighlight;
-    if (isHighlight) {
-      startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.node_on));
-    } else {
-      clearAnimation();
-    }
+	void setAnimResId(@AnimRes int nodeOnAnim) {
+		this.nodeOnAnim = nodeOnAnim;
+	}
 
-    invalidate();
-  }
+	void setHighlight(boolean isHighlight) {
+		this.isHighlight = isHighlight;
+		if (isHighlight && nodeOnAnim != 0) {
+			startAnimation(AnimationUtils.loadAnimation(getContext(), nodeOnAnim));
+		} else {
+			clearAnimation();
+		}
 
-  boolean isHighlight() {
-    return isHighlight;
-  }
+		invalidate();
+	}
 
-  int getCenterX() {
-    return (getLeft() + getRight()) / 2;
-  }
+	boolean isHighlight() {
+		return isHighlight;
+	}
 
-  int getCenterY() {
-    return (getTop() + getBottom()) / 2;
-  }
+	int getCenterX() {
+		return (getLeft() + getRight()) / 2;
+	}
+
+	int getCenterY() {
+		return (getTop() + getBottom()) / 2;
+	}
 }
