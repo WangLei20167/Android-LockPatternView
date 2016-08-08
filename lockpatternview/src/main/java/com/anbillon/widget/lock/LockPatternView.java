@@ -305,6 +305,15 @@ public final class LockPatternView extends ViewGroup {
 	}
 
 	/**
+	 * Set auto clear pattern or not.
+	 *
+	 * @param autoClear auto clear or not
+	 */
+	public void setAutoClear(boolean autoClear) {
+		this.autoClear = autoClear;
+	}
+
+	/**
 	 * Clear pattern manually if {@code autoClear} is false.
 	 */
 	public void clearPattern() {
