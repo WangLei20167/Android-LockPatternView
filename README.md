@@ -27,6 +27,11 @@ lockPatternView.setOnPatternCompleteListener(
 			});
 ```
 
+Download
+========
+
+    compile 'com.anbillon:android-lock-pattern-view:1.0.0'
+
 License
 =======
 
