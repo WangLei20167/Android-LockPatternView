@@ -11,6 +11,7 @@
     <attr format="dimension" name="nodeSize"/>
     <attr format="dimension" name="nodeAreaExpand"/>
     <attr format="boolean" name="autoClear"/>
+    <attr format="reference" name="nodeOnAnim"/>
   </declare-styleable>
 
 </resources>

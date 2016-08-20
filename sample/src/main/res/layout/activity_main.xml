@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -15,13 +16,31 @@
       android:id="@+id/lock_pattern_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      app:nodeOnAnim="@anim/node_on"
       />
 
-  <Button
-      android:id="@+id/btn_clear"
-      android:layout_width="wrap_content"
+  <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/clear"
-      />
+      android:orientation="horizontal"
+      >
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/auto_clear_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/auto_clear"
+        />
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear"
+        android:visibility="gone"
+        />
+
+  </LinearLayout>
 
 </LinearLayout>

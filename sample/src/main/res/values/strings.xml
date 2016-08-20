@@ -1,6 +1,7 @@
 <resources>
 
   <string name="app_name">LockPatternView</string>
+  <string name="auto_clear">Auto Clear</string>
   <string name="clear">Clear</string>
 
 </resources>
